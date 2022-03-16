@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "92bca4b1-0eb9-48f0-b93f-6311ea2217b4",
+		"name": "YandexDisk_SMIRNOV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Files and Folders",
+			"item": [
+				{
+					"name": "Create folder",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"test_folder\",\"folder \" + randInt())\r",
+									"\r",
+									"function randInt(min = 1, max = 1000) {\r",
+									"  let rand = min - 0.5 + Math.random() * (max - min + 1);\r",
+									"  return Math.round(rand);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/v1/disk/resources?path={{test_folder}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"disk",
+								"resources"
+							],
+							"query": [
+								{
+									"key": "path",
+									"value": "{{test_folder}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete folder",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/v1/disk/resources?path={{test_folder}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"disk",
+								"resources"
+							],
+							"query": [
+								{
+									"key": "path",
+									"value": "{{test_folder}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Copy from root",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/v1/disk/resources/copy?from=/{{filename}}&path={{test_folder}}/{{filename}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"disk",
+								"resources",
+								"copy"
+							],
+							"query": [
+								{
+									"key": "from",
+									"value": "/{{filename}}"
+								},
+								{
+									"key": "path",
+									"value": "{{test_folder}}/{{filename}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get download link",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/v1/disk/resources/download?path={{test_folder}}/{{filename}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v1",
+								"disk",
+								"resources",
+								"download"
+							],
+							"query": [
+								{
+									"key": "path",
+									"value": "{{test_folder}}/{{filename}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "Authorization",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
